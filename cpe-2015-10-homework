@@ -1,0 +1,17 @@
+CPE-2015-10
+P.3
+a=input('輸入:')
+for k in '….,:;()!':
+  a=a.replace(k,'')
+  a=a.strip()
+  
+try:
+  b=a.split(' ')
+  for s in b:
+    if s == '':
+        b.remove(s)
+  
+  print(len(b))
+  
+except ValueError:
+  print('輸入有誤')  

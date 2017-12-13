@@ -111,7 +111,7 @@ with open ("text.txt", 'r', encoding='UTF-8') as file: #r為讀，w為寫
   words = jieba.cut(text)
   counter = collections.Counter()
   
-  for k in words:
+  for k in words or k == '/n':  #把'/n'砍掉
     if k not in stop_words:
       counter[k]+=1
     

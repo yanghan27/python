@@ -1,1 +1,46 @@
-
+with open ("text.txt", 'r', encoding='UTF-8') as file: #r為讀，w為寫
+  text= file.read()
+  print(text)
+  print('-'*30)
+  
+  #-------------把空白去掉
+  text=text.strip()
+  print(text)
+  print('-'*30)
+  
+  #-------------把標點符號去掉
+  for k in '.:;(),!':
+    text=text.replace(k, '')
+    
+  print(text)
+  print('-'*30)
+  
+  #-------------用空白分割成一個一個
+  words = text.split(' ')
+  
+  print(words)
+  print('-'*30)
+  
+  #-------------統計出現的次數
+  counter = dict()
+  
+  stops=['a', 'as', 'is', 'and', 'for'] #定義停用詞
+  
+  for k in words:
+    m = k.lower() #先轉為小寫，以防大小寫重複計算
+    
+    if m not in stops: #如果沒有出現停用詞，再繼續執行以下
+      if m in counter:
+        counter[m] = counter[m] + 1
+      else:
+        counter[m] = 1
+  
+  print(counter)
+  print('-'*30)
+  
+  #-------------統計出現的次數
+  for k in counter:
+    if counter[k] >= 3:
+      print(k, counter[k])
+  
+  

@@ -44,3 +44,85 @@ with open ("text.txt", 'r', encoding='UTF-8') as file: #r為讀，w為寫
       print(k, counter[k])
   
   
+-----------------------------外掛模組collections---------------------------------------
+#(1)import collections
+#(2)import collections as co
+from collections import Counter
+
+
+with open ("text.txt", 'r', encoding='UTF-8') as file: #r為讀，w為寫
+  text= file.read()
+  print(text)
+  print('-'*30)
+  
+  #-------------把空白去掉
+  text=text.strip()
+  print(text)
+  print('-'*30)
+  
+  #-------------把標點符號去掉
+  for k in '.:;(),!':
+    text=text.replace(k, '')
+    
+  print(text)
+  print('-'*30)
+  
+  #-------------用空白分割成一個一個
+  words = text.split(' ')
+  
+  print(words)
+  print('-'*30)
+  
+  #-------------統計出現的次數
+  stops=['a', 'as', 'is', 'and', 'for'] #定義停用詞
+  
+  #下面怎麼寫取決於上面怎麼匯入
+  #(1)counter = collections.Counter() #collections裡的counter
+  #(2)counter = co.Counter() #collections裡的counter
+  counter = Counter() #collections裡的counter
+  for k in words:
+    m = k.lower()
+    if m not in stops:
+      counter[m] += 1
+    
+  print(counter.most_common(10)) #most_commom(10)前十名叫出
+  
+  
+  
+  -----------------------------jieba結巴中文中文分詞-測試發文post1---------------------------------------
+import collections
+import jieba
+
+
+#------------------------
+stop_file = open ("stops", 'r', encoding='UTF-8') 
+stop_txt = stop_file.read()
+stop_words = stop_txt.split('\n') #'\n'跳行裁割
+
+
+#------------------------
+with open ("text.txt", 'r', encoding='UTF-8') as file: #r為讀，w為寫
+  text= file.read()
+  print(text)
+  print('-'*30)
+  
+  
+  #-------------------------
+  words = jieba.cut(text)
+  counter = collections.Counter()
+  
+  for k in words:
+    if k not in stop_words:
+      counter[k]+=1
+    
+    
+  print(counter.most_common(10))
+  print('-'*30)
+  #-------------------------
+  
+  
+  
+  
+  
+  
+  
